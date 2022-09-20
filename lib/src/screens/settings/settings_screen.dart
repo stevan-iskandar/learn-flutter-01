@@ -1,9 +1,9 @@
-import 'package:app_01/src/constants/routes.dart';
-import 'package:app_01/src/ui/pages/settings/settings_controller.dart';
 import 'package:flutter/material.dart';
+import '../../constants/routes.dart';
+import '../../screens/settings/settings_controller.dart';
 
-class SettingsView extends StatelessWidget {
-  const SettingsView({
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({
     Key? key,
     required this.controller,
   }) : super(key: key);

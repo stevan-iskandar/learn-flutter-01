@@ -1,9 +1,9 @@
-import 'package:app_01/src/constants/routes.dart';
-import 'package:app_01/src/ui/widgets/icon_button_to_settings.dart';
 import 'package:flutter/material.dart';
+import '../../constants/routes.dart';
+import '../../widgets/icon_button_to_settings.dart';
 
-class SampleItemDetailsView extends StatelessWidget {
-  const SampleItemDetailsView({Key? key}) : super(key: key);
+class SampleItemDetailsScreen extends StatelessWidget {
+  const SampleItemDetailsScreen({Key? key}) : super(key: key);
 
   static const String routeName = Routes.sampleItem;
 

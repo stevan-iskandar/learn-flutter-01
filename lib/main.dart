@@ -1,7 +1,7 @@
-import 'package:app_01/src/app.dart';
-import 'package:app_01/src/ui/pages/settings/settings_controller.dart';
-import 'package:app_01/src/ui/pages/settings/settings_service.dart';
 import 'package:flutter/material.dart';
+import 'src/app.dart';
+import 'src/screens/settings/settings_controller.dart';
+import 'src/screens/settings/settings_service.dart';
 
 void main() async {
   final settingsController = SettingsController(SettingsService());

@@ -1,8 +1,8 @@
-import 'package:app_01/src/ui/pages/sample_feature/sample_item_details_view.dart';
-import 'package:app_01/src/ui/pages/sample_feature/sample_item_list_view.dart';
-import 'package:app_01/src/ui/pages/settings/settings_controller.dart';
-import 'package:app_01/src/ui/pages/settings/settings_view.dart';
 import 'package:flutter/material.dart';
+import '../screens/sample/sample_item_details_screen.dart';
+import '../screens/sample/sample_item_screen.dart';
+import '../screens/settings/settings_controller.dart';
+import '../screens/settings/settings_screen.dart';
 
 class GenerateRouteService {
   const GenerateRouteService({
@@ -17,14 +17,14 @@ class GenerateRouteService {
         settings: routeSettings,
         builder: (BuildContext context) {
           switch (routeSettings.name) {
-            case SettingsView.routeName:
-              return SettingsView(controller: settingsController);
-            case SampleItemDetailsView.routeName:
-              return const SampleItemDetailsView();
-            case SampleItemListView.routeName:
-              return const SampleItemListView();
+            case SettingsScreen.routeName:
+              return SettingsScreen(controller: settingsController);
+            case SampleItemDetailsScreen.routeName:
+              return const SampleItemDetailsScreen();
+            case SampleItemScreen.routeName:
+              return const SampleItemScreen();
             default:
-              return const SampleItemListView();
+              return const SampleItemScreen();
           }
         },
       );

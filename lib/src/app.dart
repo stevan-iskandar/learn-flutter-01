@@ -1,8 +1,8 @@
-import 'package:app_01/src/services/generate_route_service.dart';
-import 'package:app_01/src/ui/pages/settings/settings_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'screens/settings/settings_controller.dart';
+import 'services/generate_route_service.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           ],
           onGenerateTitle: (BuildContext context) =>
               AppLocalizations.of(context)!.appTitle,
-          theme: ThemeData(),
+          theme: ThemeData(fontFamily: 'Montserrat'),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
           onGenerateRoute: generateRouteService.load(),

@@ -1,5 +1,5 @@
-import 'package:app_01/src/ui/pages/settings/settings_service.dart';
 import 'package:flutter/material.dart';
+import '../../screens/settings/settings_service.dart';
 
 class SettingsController with ChangeNotifier {
   SettingsController(this._settingsService);
