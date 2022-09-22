@@ -8,43 +8,12 @@ import 'now_drawer_tile.dart';
 class NowDrawer extends StatelessWidget {
   const NowDrawer({
     Key? key,
+    required this.menus,
     this.currentPage,
   }) : super(key: key);
 
+  final List<NowDrawerMenus> menus;
   final String? currentPage;
-
-  final List<NowDrawerMenus> menus = const [
-    NowDrawerMenus(
-      title: 'Home',
-      url: '/home',
-      icon: FontAwesomeIcons.house,
-    ),
-    NowDrawerMenus(
-      title: 'Components',
-      url: '/components',
-      icon: FontAwesomeIcons.dharmachakra,
-    ),
-    NowDrawerMenus(
-      title: 'Articles',
-      url: '/articles',
-      icon: FontAwesomeIcons.newspaper,
-    ),
-    NowDrawerMenus(
-      title: 'Profile',
-      url: '/profile',
-      icon: FontAwesomeIcons.user,
-    ),
-    NowDrawerMenus(
-      title: 'Account',
-      url: '/account',
-      icon: FontAwesomeIcons.fileInvoice,
-    ),
-    NowDrawerMenus(
-      title: 'Settings',
-      url: '/settings',
-      icon: FontAwesomeIcons.gear,
-    ),
-  ];
 
   _launchURL() async {
     Uri url = Uri(
@@ -106,10 +75,10 @@ class NowDrawer extends StatelessWidget {
                     .map(
                       (menu) => NowDrawerTile(
                         title: menu.title,
-                        isSelected: currentPage == menu.title,
+                        isSelected: currentPage == menu.name,
                         icon: menu.icon,
                         onTap: () {
-                          if (currentPage != menu.title) {
+                          if (currentPage != menu.name) {
                             Navigator.pushReplacementNamed(context, menu.url);
                           }
                         },

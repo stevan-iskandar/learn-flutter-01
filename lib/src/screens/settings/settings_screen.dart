@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../constants/routes.dart';
+import '../../models/widgets/routes.dart';
 import '../../screens/settings/settings_controller.dart';
+import '../../widgets/base_navbar.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({
@@ -8,16 +9,19 @@ class SettingsScreen extends StatelessWidget {
     required this.controller,
   }) : super(key: key);
 
-  static const String routeName = Routes.settings;
+  static const Routes route = Routes(
+    title: 'Settings',
+    name: 'settings',
+    url: '/settings',
+  );
 
   final SettingsController controller;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Settings'),
-      ),
+    return BaseNavbar(
+      title: route.title,
+      name: route.name,
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: DropdownButton<ThemeMode>(

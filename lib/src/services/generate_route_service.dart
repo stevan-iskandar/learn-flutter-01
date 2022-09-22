@@ -16,16 +16,18 @@ class GenerateRouteService {
       return MaterialPageRoute<void>(
         settings: routeSettings,
         builder: (BuildContext context) {
-          switch (routeSettings.name) {
-            case SettingsScreen.routeName:
-              return SettingsScreen(controller: settingsController);
-            case SampleItemDetailsScreen.routeName:
-              return const SampleItemDetailsScreen();
-            case SampleItemScreen.routeName:
-              return const SampleItemScreen();
-            default:
-              return const SampleItemScreen();
+          bool ifCase(String url) => routeSettings.name == url;
+
+          if (ifCase(SettingsScreen.route.url)) {
+            return SettingsScreen(controller: settingsController);
           }
+          if (ifCase(SampleItemDetailsScreen.route.url)) {
+            return const SampleItemDetailsScreen();
+          }
+          if (ifCase(SampleItemScreen.route.url)) {
+            return const SampleItemScreen();
+          }
+          return const SampleItemScreen();
         },
       );
     };

@@ -9,7 +9,7 @@ class IconButtonToSettings extends StatelessWidget {
     return IconButton(
       icon: const Icon(Icons.settings),
       onPressed: () {
-        Navigator.restorablePushNamed(context, SettingsScreen.routeName);
+        Navigator.restorablePushNamed(context, SettingsScreen.route.url);
       },
     );
   }
