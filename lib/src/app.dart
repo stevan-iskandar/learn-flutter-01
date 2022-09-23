@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:learn_flutter_01/src/constants/now_ui_colors.dart';
 import 'screens/settings/settings_controller.dart';
 import 'services/generate_route_service.dart';
 

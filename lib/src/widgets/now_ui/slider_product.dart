@@ -99,6 +99,7 @@ class _ProductCarouselState extends State<ProductCarousel> {
           setState(() {
             _current = index;
           });
+          debugPrint(_current.toString());
         },
       ),
     );
