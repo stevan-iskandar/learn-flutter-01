@@ -5,29 +5,39 @@ class NowElevatedButton extends StatelessWidget {
   const NowElevatedButton({
     Key? key,
     this.text = '',
+    this.width100 = true,
+    this.borderRadius = 4,
+    this.paddingHorizontal = 12,
+    this.primary = NowUIColors.primary,
+    this.onPrimary = NowUIColors.white,
     this.onPressed,
   }) : super(key: key);
 
   final String text;
+  final bool width100;
+  final double borderRadius;
+  final double paddingHorizontal;
+  final Color primary;
+  final Color onPrimary;
   final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
+      width: width100 ? double.infinity : null,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: NowUIColors.defaultColor,
-          onPrimary: NowUIColors.white,
+          primary: primary,
+          onPrimary: onPrimary,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(4.0),
+            borderRadius: BorderRadius.circular(borderRadius),
           ),
         ),
         onPressed: onPressed,
         child: Padding(
-          padding: const EdgeInsets.only(
-            left: 16.0,
-            right: 16.0,
+          padding: EdgeInsets.only(
+            left: paddingHorizontal,
+            right: paddingHorizontal,
             top: 12,
             bottom: 12,
           ),

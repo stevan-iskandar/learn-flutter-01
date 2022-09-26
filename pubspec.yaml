@@ -14,11 +14,12 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  http: ^0.13.5
-  flutter_dotenv: ^5.0.2
-  font_awesome_flutter: ^10.2.1
-  scrollable_positioned_list: ^0.3.4
   carousel_slider: ^4.1.1
+  flutter_dotenv: ^5.0.2
+  flutter_secure_storage: ^6.0.0
+  font_awesome_flutter: ^10.2.1
+  http: ^0.13.5
+  scrollable_positioned_list: ^0.3.4
   url_launcher: ^6.1.5
 
 dev_dependencies:

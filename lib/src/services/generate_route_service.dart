@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../screens/auth/register_screen.dart';
 import '../screens/sample/sample_item_details_screen.dart';
 import '../screens/sample/sample_item_screen.dart';
 import '../screens/settings/settings_controller.dart';
@@ -27,7 +28,7 @@ class GenerateRouteService {
           if (ifCase(SampleItemScreen.route.url)) {
             return const SampleItemScreen();
           }
-          return const SampleItemScreen();
+          return const RegisterScreen();
         },
       );
     };

@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import '../../constants/now_ui_colors.dart';
 
@@ -18,7 +17,7 @@ class CardSmall extends StatelessWidget {
   final VoidCallback onTap;
 
   static void defaultFunc() {
-    log('the function works!');
+    debugPrint('the function works!');
   }
 
   @override

@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import '../../constants/now_ui_colors.dart';
 
+enum InputType {
+  text,
+  password,
+}
+
 class Input extends StatelessWidget {
   const Input({
     Key? key,
     this.placeholder,
     this.suffixIcon,
     this.prefixIcon,
+    this.inputType = InputType.text,
     this.onTap,
     this.onChanged,
     this.autofocus = false,
@@ -17,6 +23,7 @@ class Input extends StatelessWidget {
   final String? placeholder;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
+  final InputType inputType;
   final VoidCallback? onTap;
   final VoidCallback? onChanged;
   final bool autofocus;
@@ -31,6 +38,7 @@ class Input extends StatelessWidget {
       onChanged: (String? value) => onChanged,
       controller: controller,
       autofocus: autofocus,
+      obscureText: inputType == InputType.password,
       style: const TextStyle(
         height: 0.55,
         fontSize: 13.0,

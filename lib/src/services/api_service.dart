@@ -1,17 +1,30 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService extends http.BaseClient {
-  String baseUrl = dotenv.env['APP_API_URL'] ?? 'http://localhost';
-  String? token = 'asdasdasd';
+  final storage = const FlutterSecureStorage();
 
-  _setHeaders() => {
-        'Content-type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': token != null ? 'Bearer $token' : '',
+  String baseUrl = dotenv.env['APP_API_URL'] ?? 'http://localhost';
+
+  Future<Map<String, String>> _setHeaders() async {
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+    };
+
+    String? token = await storage.read(key: 'token');
+    if (token != null) {
+      headers = {
+        ...headers,
+        'Authorization': 'Bearer $token',
       };
+    }
+
+    return headers;
+  }
 
   Uri url(Uri uri, [Map<String, String?>? queryParameters]) {
     // final slashBaseUrl = baseUrl.substring(baseUrl.length - 1);
@@ -41,7 +54,7 @@ class ApiService extends http.BaseClient {
       ),
     );
 
-    baseRequest.headers.addAll(_setHeaders());
+    baseRequest.headers.addAll(await _setHeaders());
     http.StreamedResponse response;
 
     response = await client.send(baseRequest).then((response) {
