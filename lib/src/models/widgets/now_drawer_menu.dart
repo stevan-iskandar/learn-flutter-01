@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
-class NowDrawerMenus {
-  const NowDrawerMenus({
+class NowDrawerMenu {
+  const NowDrawerMenu({
     required this.title,
     required this.name,
     required this.url,

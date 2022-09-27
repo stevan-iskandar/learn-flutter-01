@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../constants/now_ui_colors.dart';
 
-class CardSquare extends StatelessWidget {
-  const CardSquare({
+class NowCardHorizontal extends StatelessWidget {
+  const NowCardHorizontal({
     Key? key,
     this.title = 'Placeholder Title',
     this.cta = '',
@@ -23,29 +23,23 @@ class CardSquare extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 250,
-      width: null,
+      height: 130,
       child: GestureDetector(
         onTap: onTap,
         child: Card(
           elevation: 3,
           shadowColor: NowUIColors.muted.withOpacity(0.22),
           shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(4.0),
-            ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+              borderRadius: BorderRadius.all(Radius.circular(4.0))),
+          child: Row(
             children: [
               Flexible(
-                flex: 3,
+                flex: 1,
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(4.0),
-                      topRight: Radius.circular(4.0),
-                    ),
+                        topLeft: Radius.circular(4.0),
+                        bottomLeft: Radius.circular(4.0)),
                     image: DecorationImage(
                       image: NetworkImage(img),
                       fit: BoxFit.cover,
@@ -56,12 +50,7 @@ class CardSquare extends StatelessWidget {
               Flexible(
                 flex: 1,
                 child: Padding(
-                  padding: const EdgeInsets.only(
-                    top: 9.0,
-                    bottom: 10.0,
-                    left: 16.0,
-                    right: 16.0,
-                  ),
+                  padding: const EdgeInsets.all(16.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,

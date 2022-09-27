@@ -6,8 +6,8 @@ enum InputType {
   password,
 }
 
-class Input extends StatelessWidget {
-  const Input({
+class NowInput extends StatelessWidget {
+  const NowInput({
     Key? key,
     this.placeholder,
     this.suffixIcon,
@@ -15,9 +15,11 @@ class Input extends StatelessWidget {
     this.inputType = InputType.text,
     this.onTap,
     this.onChanged,
+    this.enabled = true,
     this.autofocus = false,
     this.borderColor = NowUIColors.border,
     this.controller,
+    this.margin = EdgeInsets.zero,
   }) : super(key: key);
 
   final String? placeholder;
@@ -25,17 +27,20 @@ class Input extends StatelessWidget {
   final Widget? prefixIcon;
   final InputType inputType;
   final VoidCallback? onTap;
-  final VoidCallback? onChanged;
+  final void Function(String?)? onChanged;
+  final bool enabled;
   final bool autofocus;
   final Color borderColor;
   final TextEditingController? controller;
+  final EdgeInsetsGeometry margin;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    final textField = TextField(
       cursorColor: NowUIColors.muted,
       onTap: onTap,
-      onChanged: (String? value) => onChanged,
+      onChanged: (String? value) => onChanged!(value),
+      enabled: enabled,
       controller: controller,
       autofocus: autofocus,
       obscureText: inputType == InputType.password,
@@ -72,5 +77,12 @@ class Input extends StatelessWidget {
         hintText: placeholder,
       ),
     );
+
+    return margin != EdgeInsets.zero
+        ? Padding(
+            padding: margin,
+            child: textField,
+          )
+        : textField;
   }
 }

@@ -1,10 +1,16 @@
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
-class ApiService extends http.BaseClient {
+class Api extends http.BaseClient {
+  Api({
+    this.url = '',
+  });
+
+  final String url;
+
   final storage = const FlutterSecureStorage();
 
   String baseUrl = dotenv.env['APP_API_URL'] ?? 'http://localhost';
@@ -26,16 +32,6 @@ class ApiService extends http.BaseClient {
     return headers;
   }
 
-  Uri url(Uri uri, [Map<String, String?>? queryParameters]) {
-    // final slashBaseUrl = baseUrl.substring(baseUrl.length - 1);
-    // final slashPath = path.substring(0, 1);
-
-    // if (slashBaseUrl == '/') baseUrl = baseUrl.substring(0, baseUrl.length - 1);
-    // if (slashPath == '/') path = path.substring(1, path.length);
-
-    return Uri(path: uri.path);
-  }
-
   @override
   Future<http.StreamedResponse> send(http.BaseRequest request) async {
     final client = http.Client();
@@ -48,7 +44,12 @@ class ApiService extends http.BaseClient {
         userInfo: request.url.userInfo,
         host: uri.host,
         port: uri.port,
-        path: request.url.path,
+        // path: 'api/$url/${request.url.path}',
+        pathSegments: [
+          'api',
+          if (url != '') url,
+          ...request.url.pathSegments,
+        ],
         query: request.url.query,
         fragment: request.url.fragment,
       ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../constants/now_ui_colors.dart';
 
-class CardSmall extends StatelessWidget {
-  const CardSmall({
+class NowCardSmall extends StatelessWidget {
+  const NowCardSmall({
     Key? key,
     this.title = 'Placeholder Title',
     this.cta = '',

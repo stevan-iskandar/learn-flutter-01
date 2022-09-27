@@ -11,6 +11,7 @@ class NowElevatedButton extends StatelessWidget {
     this.primary = NowUIColors.primary,
     this.onPrimary = NowUIColors.white,
     this.onPressed,
+    this.margin = EdgeInsets.zero,
   }) : super(key: key);
 
   final String text;
@@ -20,10 +21,11 @@ class NowElevatedButton extends StatelessWidget {
   final Color primary;
   final Color onPrimary;
   final VoidCallback? onPressed;
+  final EdgeInsetsGeometry margin;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    final button = SizedBox(
       width: width100 ? double.infinity : null,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -48,5 +50,12 @@ class NowElevatedButton extends StatelessWidget {
         ),
       ),
     );
+
+    return margin != EdgeInsets.zero
+        ? Padding(
+            padding: margin,
+            child: button,
+          )
+        : button;
   }
 }

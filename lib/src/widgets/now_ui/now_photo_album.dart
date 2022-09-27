@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../constants/now_ui_colors.dart';
 
-class PhotoAlbum extends StatelessWidget {
-  const PhotoAlbum({
+class NowPhotoAlbum extends StatelessWidget {
+  const NowPhotoAlbum({
     Key? key,
     required this.imgArray,
   }) : super(key: key);

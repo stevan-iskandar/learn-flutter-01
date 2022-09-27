@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import '../screens/auth/register_screen.dart';
+import '../screens/auth/login_screen.dart';
 import '../screens/sample/sample_item_details_screen.dart';
 import '../screens/sample/sample_item_screen.dart';
 import '../screens/settings/settings_controller.dart';
 import '../screens/settings/settings_screen.dart';
 
-class GenerateRouteService {
-  const GenerateRouteService({
+class GenerateRoute {
+  const GenerateRoute({
     required this.settingsController,
   });
 
@@ -28,7 +28,7 @@ class GenerateRouteService {
           if (ifCase(SampleItemScreen.route.url)) {
             return const SampleItemScreen();
           }
-          return const RegisterScreen();
+          return const LoginScreen();
         },
       );
     };

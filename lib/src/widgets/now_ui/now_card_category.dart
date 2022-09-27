@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../constants/now_ui_colors.dart';
 
-class CardCategory extends StatelessWidget {
-  const CardCategory({
+class NowCardCategory extends StatelessWidget {
+  const NowCardCategory({
     Key? key,
     this.title = 'Placeholder Title',
     this.img =

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../constants/now_ui_colors.dart';
 
-class TableCellSettings extends StatelessWidget {
-  const TableCellSettings({
+class NowTableCellSettings extends StatelessWidget {
+  const NowTableCellSettings({
     Key? key,
     this.title,
     this.onTap,

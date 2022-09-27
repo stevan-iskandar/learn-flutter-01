@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'screens/settings/settings_controller.dart';
-import 'services/generate_route_service.dart';
+import 'services/generate_route.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
 
   final SettingsController settingsController;
 
-  GenerateRouteService get generateRouteService =>
-      GenerateRouteService(settingsController: settingsController);
+  GenerateRoute get generateRoute =>
+      GenerateRoute(settingsController: settingsController);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.orange,
           ),
           themeMode: settingsController.themeMode,
-          onGenerateRoute: generateRouteService.load(),
+          onGenerateRoute: generateRoute.load(),
         );
       },
     );

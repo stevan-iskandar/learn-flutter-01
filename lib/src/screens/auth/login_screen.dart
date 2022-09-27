@@ -1,22 +1,36 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../../constants/now_ui_colors.dart';
+import '../../services/api/auth_api.dart';
 import '../../widgets/base/index.dart';
 import '../../widgets/now_ui/index.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({
     Key? key,
   }) : super(key: key);
 
   @override
-  State createState() => _RegisterState();
+  State createState() => _LoginState();
 }
 
-class _RegisterState extends State<RegisterScreen> {
+class _LoginState extends State<LoginScreen> {
+  final double height = window.physicalSize.height;
+
+  String? email = '';
+  String? password = '';
   bool? _checkboxValue = false;
 
-  final double height = window.physicalSize.height;
+  final authUser = AuthApi();
+
+  void handleLogin() {
+    final response = authUser.login(
+      email: email ?? '',
+      password: password ?? '',
+    );
+
+    debugPrint(response.toString());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +77,7 @@ class _RegisterState extends State<RegisterScreen> {
                                   bottom: 8,
                                 ),
                                 child: Text(
-                                  'Register',
+                                  'Login',
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.w600,
@@ -73,48 +87,55 @@ class _RegisterState extends State<RegisterScreen> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const NowInput(
-                                    margin: EdgeInsets.all(8),
+                                  NowInput(
+                                    margin: const EdgeInsets.all(8),
                                     placeholder: 'Email...',
-                                    prefixIcon: Icon(
+                                    prefixIcon: const Icon(
                                       Icons.email,
                                       size: 20,
                                     ),
+                                    onChanged: (String? value) {
+                                      setState(() {
+                                        email = value;
+                                      });
+                                    },
                                   ),
-                                  const NowInput(
-                                    margin: EdgeInsets.all(8),
+                                  NowInput(
+                                    margin: const EdgeInsets.all(8),
                                     placeholder: 'Password...',
-                                    prefixIcon: Icon(
+                                    prefixIcon: const Icon(
                                       Icons.lock,
                                       size: 20,
                                     ),
                                     inputType: InputType.password,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        password = value;
+                                      });
+                                    },
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Checkbox(
-                                          activeColor: NowUIColors.primary,
-                                          onChanged: (bool? newValue) {
-                                            setState(() {
-                                              _checkboxValue = newValue;
-                                            });
-                                          },
-                                          value: _checkboxValue,
+                                  BaseRow(
+                                    margin: const EdgeInsets.all(8),
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Checkbox(
+                                        activeColor: NowUIColors.primary,
+                                        onChanged: (bool? newValue) {
+                                          setState(() {
+                                            _checkboxValue = newValue;
+                                          });
+                                        },
+                                        value: _checkboxValue,
+                                      ),
+                                      const Text(
+                                        'I agree with the terms and conditions',
+                                        style: TextStyle(
+                                          color: NowUIColors.black,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w200,
                                         ),
-                                        const Text(
-                                          'I agree with the terms and conditions',
-                                          style: TextStyle(
-                                            color: NowUIColors.black,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w200,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
@@ -127,11 +148,8 @@ class _RegisterState extends State<RegisterScreen> {
                                   width100: false,
                                   borderRadius: 32,
                                   paddingHorizontal: 32,
-                                  text: 'Get Started',
-                                  onPressed: () {
-                                    Navigator.pushReplacementNamed(
-                                        context, '/home');
-                                  },
+                                  text: 'Login',
+                                  onPressed: handleLogin,
                                 ),
                               ),
                             ],

@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import '../../constants/now_ui_colors.dart';
-import 'input.dart';
+import 'now_input.dart';
 
-// import 'package:now_ui_flutter/screens/trending.dart';
-// import 'package:now_ui_flutter/screens/fashion.dart';
-// import 'package:now_ui_flutter/screens/notifications.dart';
-// import 'package:now_ui_flutter/screens/search.dart';
-// import 'package:now_ui_flutter/screens/cart.dart';
-
-class Navbar extends StatefulWidget implements PreferredSizeWidget {
-  const Navbar({
+class NowNavbar extends StatefulWidget implements PreferredSizeWidget {
+  const NowNavbar({
     Key? key,
     this.title = 'Home',
     this.categoryOne = '',
@@ -40,7 +34,7 @@ class Navbar extends StatefulWidget implements PreferredSizeWidget {
   final Function? getCurrentPage;
   final TextEditingController? searchController;
   final bool isOnSearch;
-  final VoidCallback? searchOnChanged;
+  final void Function(String?)? searchOnChanged;
   final bool searchAutofocus;
   final bool backButton;
   final bool noShadow;
@@ -50,13 +44,13 @@ class Navbar extends StatefulWidget implements PreferredSizeWidget {
   final double _prefferedHeight = 180.0;
 
   @override
-  State<Navbar> createState() => _NavbarState();
+  State<NowNavbar> createState() => _NowNavbarState();
 
   @override
   Size get preferredSize => Size.fromHeight(_prefferedHeight);
 }
 
-class _NavbarState extends State<Navbar> {
+class _NowNavbarState extends State<NowNavbar> {
   late String activeTag;
 
   final ItemScrollController _scrollController = ItemScrollController();
@@ -204,7 +198,7 @@ class _NavbarState extends State<Navbar> {
                     left: 15,
                     right: 15,
                   ),
-                  child: Input(
+                  child: NowInput(
                     placeholder: 'What are you looking for?',
                     controller: widget.searchController,
                     onChanged: widget.searchOnChanged,

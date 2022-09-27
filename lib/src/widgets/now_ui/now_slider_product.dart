@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import '../../constants/now_ui_colors.dart';
 
-class ProductCarousel extends StatefulWidget {
+class NowProductCarousel extends StatefulWidget {
   final List<Map<String, String>> imgArray;
 
-  const ProductCarousel({
+  const NowProductCarousel({
     Key? key,
     required this.imgArray,
   }) : super(key: key);
 
   @override
-  State<ProductCarousel> createState() => _ProductCarouselState();
+  State<NowProductCarousel> createState() => _NowProductCarouselState();
 }
 
-class _ProductCarouselState extends State<ProductCarousel> {
+class _NowProductCarouselState extends State<NowProductCarousel> {
   int _current = 0;
 
   @override

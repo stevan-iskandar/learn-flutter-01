@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../constants/now_ui_colors.dart';
-import '../../models/widgets/now_drawer_menus.dart';
+import '../../models/widgets/now_drawer_menu.dart';
 import 'now_drawer_tile.dart';
 
 class NowDrawer extends StatelessWidget {
@@ -12,7 +12,7 @@ class NowDrawer extends StatelessWidget {
     this.currentPage,
   }) : super(key: key);
 
-  final List<NowDrawerMenus> menus;
+  final List<NowDrawerMenu> menus;
   final String? currentPage;
 
   _launchURL() async {
