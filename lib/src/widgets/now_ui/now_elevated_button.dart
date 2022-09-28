@@ -29,8 +29,8 @@ class NowElevatedButton extends StatelessWidget {
       width: width100 ? double.infinity : null,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: primary,
-          onPrimary: onPrimary,
+          backgroundColor: primary,
+          foregroundColor: onPrimary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
           ),

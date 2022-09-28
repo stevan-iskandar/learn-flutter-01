@@ -1,19 +1,20 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 
-class Api extends http.BaseClient {
+class Api extends BaseClient {
   Api({
     this.url = '',
   });
 
   final String url;
 
-  final storage = const FlutterSecureStorage();
-
-  String baseUrl = dotenv.env['APP_API_URL'] ?? 'http://localhost';
+  final FlutterSecureStorage storage = const FlutterSecureStorage();
+  final Uri baseUrl =
+      Uri.parse(dotenv.env['APP_API_URL'] ?? 'http://localhost');
 
   Future<Map<String, String>> _setHeaders() async {
     Map<String, String> headers = {
@@ -33,32 +34,12 @@ class Api extends http.BaseClient {
   }
 
   @override
-  Future<http.StreamedResponse> send(http.BaseRequest request) async {
-    final client = http.Client();
-    final Uri uri = Uri.parse(baseUrl);
+  Future<StreamedResponse> send(BaseRequest request) async {
+    final client = Client();
 
-    http.BaseRequest baseRequest = http.Request(
-      request.method,
-      Uri(
-        scheme: uri.scheme,
-        userInfo: request.url.userInfo,
-        host: uri.host,
-        port: uri.port,
-        // path: 'api/$url/${request.url.path}',
-        pathSegments: [
-          'api',
-          if (url != '') url,
-          ...request.url.pathSegments,
-        ],
-        query: request.url.query,
-        fragment: request.url.fragment,
-      ),
-    );
+    request.headers.addAll(await _setHeaders());
 
-    baseRequest.headers.addAll(await _setHeaders());
-    http.StreamedResponse response;
-
-    response = await client.send(baseRequest).then((response) {
+    return client.send(request).then((response) {
       try {
         if (response.statusCode != 200) {
           throw HttpException('${response.statusCode}');
@@ -71,8 +52,35 @@ class Api extends http.BaseClient {
         debugPrint('Bad response format 👎');
       }
       return response;
-    });
-    client.close();
-    return response;
+    }).whenComplete(() => client.close());
+  }
+
+  Uri baseUri(Uri uri) => Uri(
+        scheme: baseUrl.scheme,
+        userInfo: uri.userInfo,
+        host: baseUrl.host,
+        port: baseUrl.port,
+        // path: 'api/$url/${uri.path}',
+        pathSegments: [
+          'api',
+          if (url != '') url,
+          ...uri.pathSegments,
+        ],
+        query: uri.query,
+        fragment: uri.fragment,
+      );
+
+  Future<Response> basePost(
+    Uri url, {
+    Map<String, String>? headers,
+    Object? body,
+    Encoding? encoding,
+  }) async {
+    return this.post(
+      baseUri(url),
+      headers: headers,
+      body: body,
+      encoding: encoding,
+    );
   }
 }

@@ -1,3 +1,4 @@
+import '../../helpers/json.dart';
 import 'master/login_history.dart';
 import 'master/module.dart';
 
@@ -28,4 +29,22 @@ class AuthUser {
 
   final List<Module>? modules;
   final List<LoginHistory>? loginHistories;
+
+  factory AuthUser.fromJSON(dynamic data) {
+    Map<String, dynamic> json = parseJSON(data);
+
+    return AuthUser(
+      id: json['id'],
+      encryptionId: json['encryption_id'],
+      username: json['username'],
+      email: json['email'],
+      name: json['name'],
+      firstname: json['firstname'],
+      lastname: json['lastname'],
+      modules: json['modules'],
+      token: json['token'],
+      expirationToken: json['expiration_token'],
+      loginHistories: json['login_histories'],
+    );
+  }
 }

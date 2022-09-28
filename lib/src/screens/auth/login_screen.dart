@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:learn_flutter_01/src/models/api/response/status422.dart';
 import '../../constants/now_ui_colors.dart';
 import '../../services/api/auth_api.dart';
 import '../../widgets/base/index.dart';
@@ -21,15 +22,27 @@ class _LoginState extends State<LoginScreen> {
   String? password = '';
   bool? _checkboxValue = false;
 
+  Map<String, dynamic>? loginErrors = {};
+
   final authUser = AuthApi();
 
-  void handleLogin() {
-    final response = authUser.login(
+  void handleLogin() async {
+    setState(() {
+      loginErrors = {};
+    });
+
+    final response = await authUser.login(
       email: email ?? '',
       password: password ?? '',
     );
 
-    debugPrint(response.toString());
+    if (response.statusCode == 422) {
+      final body = Status422.fromJSON(response.body);
+
+      setState(() {
+        loginErrors = body.errors;
+      });
+    }
   }
 
   @override
@@ -94,6 +107,7 @@ class _LoginState extends State<LoginScreen> {
                                       Icons.email,
                                       size: 20,
                                     ),
+                                    error: loginErrors!['email'] != null,
                                     onChanged: (String? value) {
                                       setState(() {
                                         email = value;
@@ -108,6 +122,7 @@ class _LoginState extends State<LoginScreen> {
                                       size: 20,
                                     ),
                                     inputType: InputType.password,
+                                    error: loginErrors!['password'] != null,
                                     onChanged: (value) {
                                       setState(() {
                                         password = value;

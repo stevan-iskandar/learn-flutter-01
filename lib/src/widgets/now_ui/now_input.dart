@@ -19,6 +19,7 @@ class NowInput extends StatelessWidget {
     this.autofocus = false,
     this.borderColor = NowUIColors.border,
     this.controller,
+    this.error,
     this.margin = EdgeInsets.zero,
   }) : super(key: key);
 
@@ -32,6 +33,7 @@ class NowInput extends StatelessWidget {
   final bool autofocus;
   final Color borderColor;
   final TextEditingController? controller;
+  final bool? error;
   final EdgeInsetsGeometry margin;
 
   @override
@@ -44,6 +46,8 @@ class NowInput extends StatelessWidget {
       controller: controller,
       autofocus: autofocus,
       obscureText: inputType == InputType.password,
+      autocorrect: inputType != InputType.password,
+      enableSuggestions: inputType != InputType.password,
       style: const TextStyle(
         height: 0.55,
         fontSize: 13.0,
@@ -61,7 +65,7 @@ class NowInput extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(32.0),
           borderSide: BorderSide(
-            color: borderColor,
+            color: error == true ? NowUIColors.inputError : borderColor,
             width: 1.0,
             style: BorderStyle.solid,
           ),
@@ -69,7 +73,7 @@ class NowInput extends StatelessWidget {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(32.0),
           borderSide: BorderSide(
-            color: borderColor,
+            color: error == true ? NowUIColors.inputError : borderColor,
             width: 1.0,
             style: BorderStyle.solid,
           ),

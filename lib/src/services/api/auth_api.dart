@@ -8,7 +8,7 @@ class AuthApi extends Api {
     required String email,
     required String password,
   }) async {
-    return this.post(
+    return basePost(
       Uri(path: 'login'),
       body: {
         'email': email,
