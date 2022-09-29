@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../../constants/now_ui_colors.dart';
-import '../../widgets/base/index.dart';
-import '../../widgets/now_ui/index.dart';
+import '../../widgets/base/base.dart';
+import '../../widgets/now_ui/now.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({

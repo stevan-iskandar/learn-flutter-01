@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../models/widgets/now_drawer_menu.dart';
 import '../../screens/sample/sample_item_screen.dart';
 import '../../screens/settings/settings_screen.dart';
-import '../../widgets/now_ui/index.dart';
+import '../now_ui/now.dart';
 
 class BaseNavbar extends StatelessWidget {
   const BaseNavbar({

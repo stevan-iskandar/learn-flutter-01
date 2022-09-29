@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../../models/widgets/routes.dart';
 import '../../models/widgets/sample.dart';
 import 'sample_item_details_screen.dart';
-import '../../widgets/now_ui/index.dart';
-import '../../widgets/base/index.dart';
+import '../../widgets/now_ui/now.dart';
+import '../../widgets/base/base.dart';
 
 class SampleItemScreen extends StatelessWidget {
   const SampleItemScreen({

@@ -1,10 +1,11 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:learn_flutter_01/src/models/api/response/status422.dart';
+import 'package:learn_flutter_01/src/screens/sample/sample_item_screen.dart';
 import '../../constants/now_ui_colors.dart';
 import '../../services/api/auth_api.dart';
-import '../../widgets/base/index.dart';
-import '../../widgets/now_ui/index.dart';
+import '../../widgets/base/base.dart';
+import '../../widgets/now_ui/now.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({
@@ -18,31 +19,35 @@ class LoginScreen extends StatefulWidget {
 class _LoginState extends State<LoginScreen> {
   final double height = window.physicalSize.height;
 
-  String? email = '';
-  String? password = '';
-  bool? _checkboxValue = false;
-
-  Map<String, dynamic>? loginErrors = {};
+  String _email = '';
+  String _password = '';
+  bool _checkboxValue = false;
+  Map<String, dynamic> _loginErrors = {};
 
   final authUser = AuthApi();
 
   void handleLogin() async {
     setState(() {
-      loginErrors = {};
+      _loginErrors = {};
     });
 
-    final response = await authUser.login(
-      email: email ?? '',
-      password: password ?? '',
-    );
+    await authUser
+        .login(
+      email: _email,
+      password: _password,
+    )
+        .then((response) {
+      // if (response.statusCode == 422) {
+      //   final body = Status422.fromJSON(response.body);
 
-    if (response.statusCode == 422) {
-      final body = Status422.fromJSON(response.body);
+      //   setState(() {
+      //     _loginErrors = body.errors;
+      //   });
+      // }
 
-      setState(() {
-        loginErrors = body.errors;
-      });
-    }
+      debugPrint(response.toString());
+      // Navigator.pushNamed(context, SampleItemScreen.route.url);
+    });
   }
 
   @override
@@ -107,10 +112,10 @@ class _LoginState extends State<LoginScreen> {
                                       Icons.email,
                                       size: 20,
                                     ),
-                                    error: loginErrors!['email'] != null,
+                                    error: _loginErrors['email'] != null,
                                     onChanged: (String? value) {
                                       setState(() {
-                                        email = value;
+                                        _email = value ?? '';
                                       });
                                     },
                                   ),
@@ -122,10 +127,10 @@ class _LoginState extends State<LoginScreen> {
                                       size: 20,
                                     ),
                                     inputType: InputType.password,
-                                    error: loginErrors!['password'] != null,
-                                    onChanged: (value) {
+                                    error: _loginErrors['password'] != null,
+                                    onChanged: (String? value) {
                                       setState(() {
-                                        password = value;
+                                        _password = value ?? '';
                                       });
                                     },
                                   ),
@@ -137,7 +142,7 @@ class _LoginState extends State<LoginScreen> {
                                         activeColor: NowUIColors.primary,
                                         onChanged: (bool? newValue) {
                                           setState(() {
-                                            _checkboxValue = newValue;
+                                            _checkboxValue = newValue ?? false;
                                           });
                                         },
                                         value: _checkboxValue,

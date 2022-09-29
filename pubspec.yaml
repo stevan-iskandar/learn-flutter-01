@@ -18,7 +18,7 @@ dependencies:
   flutter_dotenv: ^5.0.2
   flutter_secure_storage: ^6.0.0
   font_awesome_flutter: ^10.2.1
-  http: ^0.13.5
+  dio: ^4.0.6
   scrollable_positioned_list: ^0.3.4
   url_launcher: ^6.1.5
 

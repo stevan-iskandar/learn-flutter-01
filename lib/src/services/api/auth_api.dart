@@ -1,4 +1,4 @@
-import 'package:http/http.dart';
+import 'package:dio/dio.dart';
 import 'api.dart';
 
 class AuthApi extends Api {
@@ -8,9 +8,9 @@ class AuthApi extends Api {
     required String email,
     required String password,
   }) async {
-    return basePost(
-      Uri(path: 'login'),
-      body: {
+    return api.post(
+      'login',
+      data: {
         'email': email,
         'password': password,
       },
