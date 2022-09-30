@@ -1,8 +1,10 @@
 import 'dart:ui';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:learn_flutter_01/src/models/api/response/status422.dart';
-import 'package:learn_flutter_01/src/screens/sample/sample_item_screen.dart';
+import 'package:learn_flutter_01/src/services/api/api.dart';
+import '../../models/api/response/status422.dart';
 import '../../constants/now_ui_colors.dart';
+import '../../screens/sample/sample_item_screen.dart';
 import '../../services/api/auth_api.dart';
 import '../../widgets/base/base.dart';
 import '../../widgets/now_ui/now.dart';
@@ -37,16 +39,20 @@ class _LoginState extends State<LoginScreen> {
       password: _password,
     )
         .then((response) {
-      // if (response.statusCode == 422) {
-      //   final body = Status422.fromJSON(response.body);
+      final api = Api();
 
-      //   setState(() {
-      //     _loginErrors = body.errors;
-      //   });
-      // }
+      api.updateApi(response.data['data']['token']);
 
-      debugPrint(response.toString());
-      // Navigator.pushNamed(context, SampleItemScreen.route.url);
+      Navigator.pushNamed(context, SampleItemScreen.route.url);
+    }).onError((DioError error, stackTrace) {
+      Response<dynamic>? response = error.response;
+      if (response!.statusCode == 422) {
+        final body = Status422.fromJSON(response.data);
+
+        setState(() {
+          _loginErrors = body.errors;
+        });
+      }
     });
   }
 
